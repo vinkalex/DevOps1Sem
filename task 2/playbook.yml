@@ -5,32 +5,32 @@
   vars:
     working_directory: ./
 
-  tasks:
-    - block: ###### CentOS #####
-      - name: install Python3 for CentOS
-        yum: name=python3 state=latest
-      - name: install pip3
-        yum: name=python3-pip state=present 
-      when: ansible_os_family == "RedHat"
+
+- block: ###### CentOS #####
+  - name: install Python3 for CentOS
+    yum: name=python3 state=latest
+  - name: install pip3
+    yum: name=python3-pip state=present 
+  when: ansible_os_family == "RedHat"
       
 
-    - block: ##### Debian #####
-      - name: install Python3 for Debian
-        apt: name=python3 state=latest
-      - name: install pip3
-        apt: name=python3-pip state=present 
-      when: ansible_os_family == "Debian"
+- block: ##### Debian #####
+  - name: install Python3 for Debian
+    apt: name=python3 state=latest
+  - name: install pip3
+    apt: name=python3-pip state=present 
+  when: ansible_os_family == "Debian"
     
     
-    ##### Code #####
-    - name: execute code
-      ansible.builtin.shell:
-        cmd: chmod ugo +rwx my_python_script.py
-        chdir: "{{ working_directory }}"
+- block: ##### Code #####
+  - name: execute code
+    ansible.builtin.shell:
+      cmd: chmod ugo +rwx my_python_script.py
+      chdir: "{{ working_directory }}"
 
-    - name: run code
-      ansible.builtin.shell:
-        cmd: python3 my_python_script.py
-        chdir: "{{ working_directory }}"
+  - name: run code
+    ansible.builtin.shell:
+      cmd: python3 my_python_script.py
+      chdir: "{{ working_directory }}"
 
 ...
