@@ -1,0 +1,24 @@
+---
+- name: nginx install and start
+  hosts: all
+  become: yes
+  
+  vars:
+    working_directory: ./
+
+  tasks:
+      - name: nginx install
+        yum: name=nginx state=latest update_cache=yes
+      when: ansible_os_family == "RedHat"
+      
+
+      - name: nginx install
+        apt: name=nginx state=latest update_cache=yes
+      when: ansible_os_family == "Debian"
+    
+    
+      - name: start service
+        service:
+          name: nginx
+          state: started
+...
