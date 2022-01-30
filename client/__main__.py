@@ -3,7 +3,7 @@
 from socket import socket, AF_INET, SOCK_STREAM
 
 HOST = '0.0.0.0'
-PORT = 5000
+PORT = 6565
 
 with socket(AF_INET, SOCK_STREAM) as s:
     s.connect((HOST, PORT))
