@@ -1,0 +1,17 @@
+version: "3.3"
+
+services:
+  server:
+    build: server/
+    
+    command: python3 ./__main__.py
+    ports:
+      - 6565:6565
+      
+  client:
+    build: client/
+    
+    command: python3 ./__main__.py
+    network_mode: host
+    depends_on:
+      - server
